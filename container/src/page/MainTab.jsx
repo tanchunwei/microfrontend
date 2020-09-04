@@ -16,6 +16,10 @@ const MainTab = () => {
       <MicroFrontend history={history} name="Frontend1Tab" host="http://localhost:3001" />
     );
 
+    const Frontend2 = ({ history }) => (
+      <MicroFrontend history={history} name="Frontend2" host="http://localhost:3002" />
+    );
+
     return (
         <Tabs activeKey={key} onSelect={handleSelect} id="uncontrolled-tab-example">
           <Tab eventKey={1} title="Home" transition={false}>
@@ -24,8 +28,8 @@ const MainTab = () => {
           <Tab eventKey={2} title="Profile" transition={false}>
             <Frontend1Tab />
           </Tab>
-          <Tab eventKey={3} title="Contact" transition={false} disabled>
-            <InternalTab1 />
+          <Tab eventKey={3} title="Contact" transition={false}>
+            <Frontend2 />
           </Tab>
         </Tabs>
     )
