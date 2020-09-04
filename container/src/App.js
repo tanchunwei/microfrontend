@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
-import MicroFrontend from './MicroFrontend';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import MicroFrontend from './common/MicroFrontend';
 import Home from './Home';
 
 function App() {
