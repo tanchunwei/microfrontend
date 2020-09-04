@@ -1,10 +1,14 @@
 import React from 'react';
 
 class MicroFrontend extends React.Component {
+  handleRender = () => {
+    this.renderMicroFrontend(false);
+  }
+
   constructor(props) {
       super(props);
 
-      this.state = { totalScript: 1, loadedScript : 0 };
+      this.state = { totalScript: 1, loadedScript : 0};
   }
 
   componentDidMount() {
@@ -12,7 +16,7 @@ class MicroFrontend extends React.Component {
     const scriptId = `micro-frontend-script-${name}`;
 
     if (document.getElementById(scriptId)) {
-      this.renderMicroFrontend();
+      this.renderMicroFrontend(true);
       return;
     }
 
@@ -34,7 +38,7 @@ class MicroFrontend extends React.Component {
             const script = document.createElement('script');
             script.id = scriptId;
             script.src = `${host}/${src}`;
-            script.onload = this.renderMicroFrontend;
+            script.onload = this.handleRender
             document.head.appendChild(script);
         });
       });
@@ -46,14 +50,14 @@ class MicroFrontend extends React.Component {
     window[`unmount${name}`](`${name}-container`);
   }
 
-  renderMicroFrontend = () => {
+  renderMicroFrontend = (isLoaded) => {
     const { name, window, history } = this.props;
 
     this.setState(prevState => ({
       loadedScript : prevState.loadedScript + 1
     }));
 
-    if(this.state.totalScript !== this.state.loadedScript){
+    if(!isLoaded && this.state.totalScript !== this.state.loadedScript){
         return;
     }
 
