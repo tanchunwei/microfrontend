@@ -12,6 +12,10 @@ function App() {
       <MicroFrontend history={history} name="Frontend1" host="http://localhost:3001" />
     );
 
+    const Frontend2 = ({ history }) => (
+      <MicroFrontend history={history} name="Frontend2" host="http://localhost:3002" />
+    );
+
   return (
     <Router>
         <div className="App">
@@ -19,6 +23,7 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/tab" component={MainTab} />
                 <Route exact path="/frontend-1" component={Frontend1} />
+                <Route exact path="/frontend-2" component={Frontend2} />
             </Switch>
         </div>
     </Router>
