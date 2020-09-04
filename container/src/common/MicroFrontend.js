@@ -31,6 +31,7 @@ class MicroFrontend extends React.Component {
     const { name, window, history } = this.props;
 
     window[`render${name}`](`${name}-container`, history);
+    // e.g window.renderFrontend1('Frontend1-container', history);
   };
 
   render() {
