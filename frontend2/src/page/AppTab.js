@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { EuiFlexGroup, EuiFlexItem, EuiAvatar, EuiFieldText } from '@elastic/eui'
+import '@elastic/eui/dist/eui_theme_light.css';
+
 function AppTab() {
 
   const handleSubmit = (e) => {
@@ -13,8 +16,28 @@ function AppTab() {
 
   return (
     <div>
-        This is frontend2 tab home <br />
-        <input id="sendMessage" onKeyDown={handleSubmit}/>
+        <EuiFlexGroup>
+            <EuiFlexItem grow={1}/>
+            <EuiFlexItem grow={2}>
+                <EuiAvatar size="m" name="Frontend 2" />
+            </EuiFlexItem>
+            <EuiFlexItem grow={7}/>
+        </EuiFlexGroup>
+
+        <EuiFlexGroup>
+            <EuiFlexItem grow={1}/>
+            <EuiFlexItem grow={3}>
+                <EuiFieldText
+                    prepend = "Message"
+                    id = "sendMessage"
+                    placeholder="Press enter to send"
+                    onKeyDown={e => handleSubmit(e)}
+                    aria-label="Use aria labels when no actual label is in use"
+                  />
+              </EuiFlexItem>
+              <EuiFlexItem grow={6}/>
+        </EuiFlexGroup>
+
     </div>
   );
 }
