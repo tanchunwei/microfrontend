@@ -5,17 +5,25 @@ class MicroFrontend extends React.Component {
     this.renderMicroFrontend(false);
   }
 
+  handleErrorRender = () => {
+      this.renderMicroFrontendError();
+    }
+
   constructor(props) {
       super(props);
 
-      this.state = { totalScript: 1, loadedScript : 0};
+      this.state = { totalScript: 1, loadedScript : 0, errorOnLoad : false};
   }
 
   componentDidMount() {
     const { name, host, document } = this.props;
     const scriptId = `micro-frontend-script-${name}`;
 
-    if (document.getElementById(scriptId)) {
+    if(this.state.errorOnLoad){
+        this.renderMicroFrontendError()
+        return;
+    }
+    else if (document.getElementById(scriptId)) {
       this.renderMicroFrontend(true);
       return;
     }
@@ -32,8 +40,6 @@ class MicroFrontend extends React.Component {
           totalScript: jsScripts.length, loadedScript : 0
         });
 
-        console.log(this.state)
-
         jsScripts.forEach((src) => {
             const script = document.createElement('script');
             script.id = scriptId;
@@ -41,14 +47,33 @@ class MicroFrontend extends React.Component {
             script.onload = this.handleRender
             document.head.appendChild(script);
         });
+      })
+      .catch(err => {
+        console.log("Error when fetching microfrontend: " + err);
+        this.setState({
+          errorOnLoad : true
+        });
+        this.handleErrorRender()
       });
+
   }
 
   componentWillUnmount() {
     const { name, window } = this.props;
 
-    window[`unmount${name}`](`${name}-container`);
+    if(this.state.errorOnLoad){
+        window[`unmountMicroFrontendError`](`${name}-container`);
+    }else{
+        window[`unmount${name}`](`${name}-container`);
+    }
   }
+
+  renderMicroFrontendError = () => {
+    const { name, window, history } = this.props;
+
+    window[`renderMicroFrontendError`](`${name}-container`, history);
+    // e.g window.renderFrontend1('Frontend1-container', history);
+  };
 
   renderMicroFrontend = (isLoaded) => {
     const { name, window, history } = this.props;

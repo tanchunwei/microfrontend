@@ -2,7 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import AppError from './error/AppError'
 import * as serviceWorker from './registerServiceWorker';
+import { unregister } from './serviceWorker';
+
+window.renderMicroFrontendError = (containerId, history) => {
+  ReactDOM.render(
+    <AppError history={history} />,
+    document.getElementById(containerId),
+  );
+  unregister();
+};
+
+window.unmountMicroFrontendError = containerId => {
+  ReactDOM.unmountComponentAtNode(document.getElementById(containerId));
+};
 
 ReactDOM.render(
   <React.StrictMode>
