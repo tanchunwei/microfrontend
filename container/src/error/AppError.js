@@ -4,10 +4,10 @@ import { createBrowserHistory } from 'history';
 import FrontendError from './FrontendError';
 const defaultHistory = createBrowserHistory();
 
-const AppError = ({ history = defaultHistory }) => (
+const AppError = ({ history = defaultHistory, name = "" }) => (
   //<Router history={this.props.history || defaultHistory}>
   <Router history={defaultHistory}>
-    <FrontendError />
+    <FrontendError name={name}/>
   </Router>
 );
 

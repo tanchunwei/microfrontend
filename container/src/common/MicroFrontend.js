@@ -71,8 +71,8 @@ class MicroFrontend extends React.Component {
   renderMicroFrontendError = () => {
     const { name, window, history } = this.props;
 
-    window[`renderMicroFrontendError`](`${name}-container`, history);
-    // e.g window.renderFrontend1('Frontend1-container', history);
+    window[`renderMicroFrontendError`](`${name}-container`, history, name);
+    // e.g window.renderMicroFrontendError('Frontend1-container', history, name);
   };
 
   renderMicroFrontend = (isLoaded) => {

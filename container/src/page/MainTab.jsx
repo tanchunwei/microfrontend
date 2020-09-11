@@ -30,17 +30,17 @@ const MainTab = () => {
 
     return (
         <Tabs activeKey={key} onSelect={handleSelect} id="uncontrolled-tab-example">
-          <Tab eventKey={1} title="Home" transition={false}>
+          <Tab eventKey={1} title="Container" transition={false}>
             <InternalTab1 />
           </Tab>
-          <Tab eventKey={2} title="Profile" transition={false}>
+          <Tab eventKey={2} title="Cross Micro-frontend" transition={false}>
             <Frontend1 />
             <br/>
             <Frontend2Tab />
             <br/>
             <Frontend1Tab />
           </Tab>
-          <Tab eventKey={3} title="Contact" transition={false}>
+          <Tab eventKey={3} title="Micro-frontend" transition={false}>
             <Frontend2 />
           </Tab>
         </Tabs>

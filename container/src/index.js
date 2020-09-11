@@ -6,9 +6,9 @@ import AppError from './error/AppError'
 import * as serviceWorker from './registerServiceWorker';
 import { unregister } from './serviceWorker';
 
-window.renderMicroFrontendError = (containerId, history) => {
+window.renderMicroFrontendError = (containerId, history, name) => {
   ReactDOM.render(
-    <AppError history={history} />,
+    <AppError history={history} name = {name} />,
     document.getElementById(containerId),
   );
   unregister();
