@@ -9,7 +9,10 @@
     "test": "react-app-rewired test"
   },
   "dependencies": {
+    "@elastic/datemath": "^5.0.3",
+    "@elastic/eui": "^28.4.0",
     "history": "^4.7.2",
+    "moment": "^2.27.0",
     "react": "^16.8.6",
     "react-app-polyfill": "^0.2.2",
     "react-app-rewire-micro-frontends": "^0.0.1",
