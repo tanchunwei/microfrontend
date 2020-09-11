@@ -12,6 +12,10 @@ const MainTab = () => {
         setKey(selKey);
     }
 
+    const Frontend1 = ({ history }) => (
+      <MicroFrontend history={history} name="Frontend1" host="http://localhost:3001" />
+    );
+
     const Frontend1Tab = ({ history }) => (
       <MicroFrontend history={history} name="Frontend1Tab" host="http://localhost:3001" />
     );
@@ -26,6 +30,8 @@ const MainTab = () => {
             <InternalTab1 />
           </Tab>
           <Tab eventKey={2} title="Profile" transition={false}>
+            <Frontend1 />
+            <br/>
             <Frontend1Tab />
           </Tab>
           <Tab eventKey={3} title="Contact" transition={false}>
