@@ -63,7 +63,7 @@ class MicroFrontend extends React.Component {
 
     if(this.state.errorOnLoad){
         window[`unmountMicroFrontendError`](`${name}-container`);
-    }else{
+    }else if (window[`unmount${name}`]){
         window[`unmount${name}`](`${name}-container`);
     }
   }
@@ -86,8 +86,10 @@ class MicroFrontend extends React.Component {
         return;
     }
 
-    window[`render${name}`](`${name}-container`, history);
-    // e.g window.renderFrontend1('Frontend1-container', history);
+    if(window[`render${name}`])
+        window[`render${name}`](`${name}-container`, history); // e.g window.renderFrontend1('Frontend1-container', history);
+    else
+        this.renderMicroFrontendError();
   };
 
   render() {
