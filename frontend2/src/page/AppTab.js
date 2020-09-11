@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { EuiFlexGroup, EuiFlexItem, EuiAvatar, EuiFieldText } from '@elastic/eui'
+import { EuiFlexGroup, EuiFlexItem, EuiAvatar, EuiFieldText, EuiCard  } from '@elastic/eui'
 import '@elastic/eui/dist/eui_theme_light.css';
 
 function AppTab() {
@@ -18,25 +18,31 @@ function AppTab() {
     <div>
         <EuiFlexGroup>
             <EuiFlexItem grow={1}/>
-            <EuiFlexItem grow={2}>
-                <EuiAvatar size="m" name="Frontend 2" />
+            <EuiFlexItem grow={3}>
+                <EuiCard
+                    icon={<EuiAvatar size="m" name="Frontend 2" />}
+                    title="Micro-frontend 2"
+                    isDisable={true}
+                    description={
+                        <EuiFlexGroup>
+                            <EuiFlexItem grow={1}>
+                                <EuiFieldText
+                                    prepend = "Message"
+                                    id = "sendMessage"
+                                    placeholder="Press enter to send"
+                                    onKeyDown={e => handleSubmit(e)}
+                                    aria-label="Use aria labels when no actual label is in use"
+                                  />
+                              </EuiFlexItem>
+                        </EuiFlexGroup>
+                    }
+                />
+
             </EuiFlexItem>
-            <EuiFlexItem grow={7}/>
+            <EuiFlexItem grow={6}/>
         </EuiFlexGroup>
 
-        <EuiFlexGroup>
-            <EuiFlexItem grow={1}/>
-            <EuiFlexItem grow={3}>
-                <EuiFieldText
-                    prepend = "Message"
-                    id = "sendMessage"
-                    placeholder="Press enter to send"
-                    onKeyDown={e => handleSubmit(e)}
-                    aria-label="Use aria labels when no actual label is in use"
-                  />
-              </EuiFlexItem>
-              <EuiFlexItem grow={6}/>
-        </EuiFlexGroup>
+
 
     </div>
   );
