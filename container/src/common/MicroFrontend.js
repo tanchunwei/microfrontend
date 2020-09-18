@@ -28,34 +28,45 @@ class MicroFrontend extends React.Component {
       return;
     }
 
-    fetch(`${host}/asset-manifest.json`)
-      .then(res => res.json())
-      .then(manifest => {
-        let jsScripts = []
-        if(manifest.entrypoints)
-            jsScripts = manifest.entrypoints.filter(key => key.match(/.js$/))
-        else
-            jsScripts = Object.values(manifest).filter(key => key.match(/.js$/))
+    if(this.props.scriptPath){
         this.setState({
-          totalScript: jsScripts.length, loadedScript : 0
+          totalScript: 1, loadedScript : 0
         });
 
-        jsScripts.forEach((src) => {
-            const script = document.createElement('script');
-            script.id = scriptId;
-            script.src = `${host}/${src}`;
-            script.onload = this.handleRender
-            document.head.appendChild(script);
-        });
-      })
-      .catch(err => {
-        console.log("Error when fetching microfrontend: " + err);
-        this.setState({
-          errorOnLoad : true
-        });
-        this.handleErrorRender()
-      });
+        const script = document.createElement('script');
+        script.id = scriptId;
+        script.src = `${host}/${this.props.scriptPath}`;
+        script.onload = this.handleRender
+        document.head.appendChild(script);
+    }else{
+        fetch(`${host}/asset-manifest.json`)
+          .then(res => res.json())
+          .then(manifest => {
+            let jsScripts = []
+            if(manifest.entrypoints)
+                jsScripts = manifest.entrypoints.filter(key => key.match(/.js$/))
+            else
+                jsScripts = Object.values(manifest).filter(key => key.match(/.js$/))
+            this.setState({
+              totalScript: jsScripts.length, loadedScript : 0
+            });
 
+            jsScripts.forEach((src) => {
+                const script = document.createElement('script');
+                script.id = scriptId;
+                script.src = `${host}/${src}`;
+                script.onload = this.handleRender
+                document.head.appendChild(script);
+            });
+          })
+          .catch(err => {
+            console.log("Error when fetching microfrontend: " + err);
+            this.setState({
+              errorOnLoad : true
+            });
+            this.handleErrorRender()
+          });
+    }
   }
 
   componentWillUnmount() {
