@@ -42,9 +42,9 @@ const MainTab = () => {
             <br/>
             <Frontend2Tab />
             <br/>
-            <Frontend1Tab />
-            <br/>
             <Frontend3 />
+            <br/>
+            <Frontend1Tab />
           </Tab>
           <Tab eventKey={3} title="Micro-frontend" transition={false}>
             <Frontend2 />
