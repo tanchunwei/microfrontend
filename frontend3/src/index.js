@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WordTree from "./js/components/WordTree";
+import WordCloud from "./js/components/WordCloud";
 
 window.renderFrontend3 = (containerId, history) => {
   ReactDOM.render(
-    <WordTree />,
+    <WordCloud />,
     document.getElementById(containerId),
   );
 };
