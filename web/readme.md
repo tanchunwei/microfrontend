@@ -1,4 +1,4 @@
-In the project directory, you can run: 
+In the root directory, you can run: 
 ```
 gradle
 gradle web::bootRun
