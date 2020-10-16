@@ -18,10 +18,10 @@ class FeatureToggleController(
     fun getToggle() : ResponseEntity<String>{
         val response = ToggleResponse(mapOf(
                 "frontend1" to true,
-                "frontend2" to false,
+                "frontend2" to true,
                 "frontend3" to true
         ))
-        return ResponseEntity(objectMapper.writeValueAsString(response), HttpStatus.OK)
+        return ResponseEntity(objectMapper.writeValueAsString(response.toggle), HttpStatus.OK)
     }
 
     companion object{
