@@ -24,6 +24,11 @@ class FeatureToggleController(
         return ResponseEntity(objectMapper.writeValueAsString(response.toggle), HttpStatus.OK)
     }
 
+    @GetMapping("toggle/featureA")
+    fun getToggleFeatureA() : ResponseEntity<String>{
+        return ResponseEntity(objectMapper.writeValueAsString(true), HttpStatus.OK)
+    }
+
     companion object{
         private val logger = LoggerFactory.getLogger(FeatureToggleController::class.java)
     }

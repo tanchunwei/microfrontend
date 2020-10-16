@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import {setToggleA} from './../actions/toggle'
 import ReactWordcloud from "react-wordcloud";
 import stopwords from "./stopwords"
 import { EuiFlexGroup, EuiFlexItem, EuiAvatar, EuiComment, EuiFieldText, EuiCard } from '@elastic/eui'
 import '@elastic/eui/dist/eui_theme_light.css';
 
-const WordCloud = () => {
+const WordCloud = (props) => {
+    const dispatch = useDispatch()
+
+    const fetchFeatureAToggle = () => {
+        fetch("/api/toggle/featureA")
+            .then(res => res.json())
+            .then(res => {
+                dispatch(setToggleA(res))
+            }
+        )
+    }
+    fetchFeatureAToggle()
+
     const [words, setWords] = useState([])
     const handleEvent = (msg) => {
         var msgWords = msg.split(' ')
@@ -58,7 +73,7 @@ const WordCloud = () => {
                 <EuiFlexItem grow={3}>
                     <EuiCard
                         icon={<EuiAvatar size="m" name="Frontend 3" />}
-                        title="Micro-frontend 3"
+                        title={`Micro-frontend 3 ${props.featureA ? 'Feature A is ON' : ''}`}
                         description={
                             <EuiFlexGroup>
                                 <EuiFlexItem grow={1}>
@@ -75,4 +90,15 @@ const WordCloud = () => {
     );
 }
 
-export default WordCloud;
+WordCloud.propTypes = {
+  featureA: PropTypes.bool.isRequired
+}
+
+const mapStateToProps = (state) => {
+    return {
+        featureA: state.toggle.featureA,
+    }
+};
+
+
+export default connect(mapStateToProps)(WordCloud);
